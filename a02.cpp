@@ -18,6 +18,7 @@ using namespace std;
 
 // Constants
 const int MAXCHAR = 101;
+const char ERROR[MAXCHAR] = "Invalid option! Please try again!!";
 
 //Function Prototypes
 void welcome();
@@ -76,7 +77,7 @@ char displayMenu() {
     cin >> choice;
     choice = tolower(choice);
     while (!cin || cin.peek() != '\n' || choice != 'q' || choice != 'e') {
-        cout << "Invalid option! Please try again!!" << endl;
+        cout << ERROR << endl;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please pick an option below: " << endl;
@@ -101,6 +102,56 @@ void charToLower(char charWord[]) {
     }
 }
 
+//Name:   readInput(char fName[], lName[], bool& lateFlag) - overloaded 
+//Desc:   This function reads in the user's name and stores
+//        a boolean indicating assignment lateness.
+//input:  char yesOrNo, char lName[], char fName[]
+//output: prompts for name and lateness
+//return: none
+void readInput(char fName[], char lName[], bool& lateFlag) {
+    char yesOrNo;
+    
+    cout << "Enter your last name:";
+    cin >> lName;
+    charToLower(lName);
+
+    cout << "Enter your first name: ";
+    cin >> fName;
+    charToLower(fName);
+
+    cout << "Was your assignment late (y/n)? ";
+    cin >> yesOrNo;
+    yesOrNo = tolower(yesOrNo);
+    while (!cin || cin.peek() != '\n' || yesOrNo != '\n' || yesOrNo != '\n') {
+        cout << ERROR << endl;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Was your assignment late (y/n)? ";
+        cin >> yesOrNo;
+    }
+    if (yesOrNo == 'y') {
+        lateFlag = true;
+    }
+    else {
+        lateFlag = false;
+    }
+}
+
+//Name:   readInput(char parsedID[], charfileName[]) - overloaded 
+//Desc:   This function reads in the user's student ID, parses it,
+//        and stores it to parsedID[]. It also reads the user's 
+//        file name.
+//input:  char userID[], char fileName[]
+//output: prompt for ID/File name
+//return: none
+void readInput(char parsedID[], char fileName[]) {
+    char userID[12];
+    cout << "Enter your Student-ID (format: 222-22-2222): ";
+    cin >> userID;
+    strncpy(parsedID, userID + 7, 4);
+    cout << "Enter the file name: ";
+    cin >> fileName;
+}
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
