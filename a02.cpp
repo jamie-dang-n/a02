@@ -148,7 +148,7 @@ void readInput(char parsedID[], char fileName[]) {
     char userID[12];
     cout << "Enter your Student-ID (format: 222-22-2222): ";
     cin >> userID;
-    strncpy(parsedID, userID + 7, 4);
+    //strncpy(parsedID, userID + 7, 4);
     cout << "Enter the file name: ";
     cin >> fileName;
 }
